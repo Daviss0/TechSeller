@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Usuário</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/js-sha256/0.9.0/sha256.min.js"></script>
+</head>
+<body>
+<form id="registerForm" action="/register" method="post">
+    <label for="nome">Nome:</label>
+    <input type="text" id="nome" name="nome" required><br>
+
+    <label for="cpf">CPF:</label>
+    <input type="text" id="cpf" name="cpf" maxlength="14" required><br>
+
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" required><br>
+
+    <label for="grupo">Grupo:</label>
+    <input type="text" id="grupo" name="grupo" required><br>
+
+    <label for="senha">Senha:</label>
+    <input type="password" id="senha" name="senha" required><br>
+
+    <label for="confirmarSenha">Confirmar Senha:</label>
+    <input type="password" id="confirmarSenha" required><br>
+
+    <label for="status">Status:</label>
+    <select id="status" name="status" required>
+        <option value="ativo">Ativo</option>
+        <option value="inativo">Inativo</option>
+    </select><br>
+
+    <button type="submit">Cadastrar</button>
+</form>
+
+<script>
+    $(document).ready(function () {
+        $('#registerForm').submit(function (event) {
+            event.preventDefault();
+            let senha = $('#senha').val();
+            let confirmarSenha = $('#confirmarSenha').val();
+            let email = $('#email').val();
+            let emailValido = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+
+            if (!emailValido) {
+                alert('Email inválido!');
+                return;
+            }
+
+            if (senha !== confirmarSenha) {
+                alert('As senhas não coincidem!');
+                return;
+            }
+
+            let senhaCriptografada = sha256(senha);
+            $('<input>').attr({
+                type: 'hidden',
+                name: 'senhaCriptografada',
+                value: senhaCriptografada
+            }).appendTo('#registerForm');
+
+            $('#senha').val('');
+            $('#confirmarSenha').val('');
+            this.submit();
+        });
+    });
+</script>
+</body>
+</html>
