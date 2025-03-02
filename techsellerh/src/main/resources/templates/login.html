@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página de Login</title>
+
+</head>
+<body>
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+    }
+
+    /* Container do formulário */
+    .container {
+        background: white;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        width: 300px;
+    }
+
+    /* Estilizando o título */
+    h1 {
+        color: #333;
+    }
+
+    /* Estilizando os rótulos */
+    label {
+        display: block;
+        font-weight: bold;
+        margin-top: 10px;
+        text-align: left;
+    }
+
+    /* Estilizando os campos de entrada */
+    input {
+        width: 100%;
+        padding: 8px;
+        margin-top: 5px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+
+    /* Estilizando os botões */
+    button {
+        width: 100%;
+        padding: 10px;
+        margin-top: 15px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+    }
+
+    button[type="submit"] {
+        background-color: #28a745;
+        color: white;
+    }
+
+    button[type="submit"]:hover {
+        background-color: #218838;
+    }
+
+    button:last-child {
+        background-color: #007bff;
+        color: white;
+    }
+
+    button:last-child:hover {
+        background-color: #0056b3;
+    }
+
+
+</style>
+
+<div class="container">
+    <h1>Login</h1>
+
+    <form action="/v1/auth/login" method="post" autocomplete="off">
+        <label for="email">E-mail:</label>
+        <input type="text" id="email" name="email" value="" placeholder="Digite seu e-mail" required>
+
+        <label for="password">Senha:</label>
+        <input type="password" id="password" name="password" value="" placeholder="Digite sua senha" required autocomplete="off">
+
+        <button type="submit">Entrar</button>
+        <button type="submit">Cadastrar</button>
+    </form>
+</div>
+
+</body>
+</html>
